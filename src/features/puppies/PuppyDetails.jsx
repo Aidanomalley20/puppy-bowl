@@ -9,6 +9,9 @@ export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
     isError,
     error,
   } = useGetPuppyQuery(selectedPuppyId, { skip: !selectedPuppyId });
+  useEffect(() => {
+    console.log("Fetched Puppy Data:", puppy);
+  }, [puppy]);
 
   const [
     deletePuppy,
@@ -35,7 +38,7 @@ export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
     $details = <p>Loading puppy information...</p>;
   } else if (isError) {
     $details = <p>Error loading puppy details: {error.message}</p>;
-  } else {
+  } else if (puppy) {
     $details = (
       <>
         <h3>
@@ -61,7 +64,8 @@ export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
     </aside>
   );
 }
+
 PuppyDetails.propTypes = {
-  selectedPuppyId: PropTypes.number, 
-  setSelectedPuppyId: PropTypes.func.isRequired, 
+  selectedPuppyId: PropTypes.number,
+  setSelectedPuppyId: PropTypes.func.isRequired,
 };

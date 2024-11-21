@@ -1,5 +1,5 @@
+import { useEffect } from "react";
 import { useState } from "react";
-
 import { Provider } from "react-redux";
 import store from "./store/store";
 
@@ -10,8 +10,12 @@ import PuppyForm from "./features/puppies/PuppyForm";
 import "./App.scss";
 
 export default function App() {
-  const [selectedPuppyId, setSelectedPuppyId] = useState();
+  const [selectedPuppyId, setSelectedPuppyId] = useState(null);
 
+  console.log("Selected Puppy ID in App:", selectedPuppyId);
+  useEffect(() => {
+    console.log("Selected Puppy ID in App:", selectedPuppyId);
+  }, [selectedPuppyId]);
   return (
     <Provider store={store}>
       <h1>Puppy Bowl</h1>
