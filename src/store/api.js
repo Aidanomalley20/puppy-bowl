@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const COHORT_CODE = "2408-FTB-ET-WEB-AM";
+const COHORT_CODE = "2408-ftb-et-web-am";
 const API_URL = `https://fsa-puppy-bowl.herokuapp.com/api/${COHORT_CODE}/`;
 
 const api = createApi({

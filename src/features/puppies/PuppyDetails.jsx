@@ -25,10 +25,11 @@ export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
   }, [puppy, isLoading, setSelectedPuppyId]);
 
   function removePuppy(id) {
+    console.log("Deleting puppy with ID:", id); // This should log the correct ID
     deletePuppy(id)
       .unwrap()
       .then(() => setSelectedPuppyId(null))
-      .catch(() => {});
+      .catch((err) => console.error("Error deleting puppy:", err)); // Logs any deletion errors
   }
 
   let $details;
@@ -42,15 +43,18 @@ export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
     $details = (
       <>
         <h3>
-          {puppy.name} #{puppy.id}
+          {puppy.player.name} #{puppy.player.id}
         </h3>
-        <p>{puppy.breed}</p>
-        <p>Team {puppy.team?.name ?? "Unassigned"}</p>
-        <button onClick={() => removePuppy(puppy.id)} disabled={isDeleting}>
+        <p>{puppy.player.breed}</p>
+        <p>Team {puppy.player.team?.name ?? "Unassigned"}</p>
+        <button
+          onClick={() => removePuppy(puppy.player.id)}
+          disabled={isDeleting}
+        >
           {isDeleting ? "Removing..." : "Remove from roster"}
         </button>
         <figure>
-          <img src={puppy.imageUrl} alt={puppy.name} />
+          <img src={puppy.player.imageUrl} alt={puppy.name} />
         </figure>
       </>
     );
